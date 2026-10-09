@@ -1,5 +1,5 @@
 import { languagePreference, type Language, type LanguagePreference } from "./i18n.js";
-export const serviceIds = ["whatsapp", "messenger", "google-messages", "instagram"] as const;
+export const serviceIds = ["whatsapp", "messenger", "google-messages", "instagram", "slack", "gmail"] as const;
 export type ServiceId = typeof serviceIds[number];
 export interface AccountConfig {
   id: string;
@@ -46,7 +46,7 @@ export interface API {
   shortcut(callback: (action: string) => void): () => void;
 }
 export function defaultConfig(): Config {
-  return { schemaVersion: 1, accounts: [], services: { whatsapp: true, messenger: true, "google-messages": true, instagram: true }, settings: { closeToTray: false, language: "auto" }, window: { width: 1180, height: 800 }, selected: null, pendingDeletion: [] };
+  return { schemaVersion: 1, accounts: [], services: { whatsapp: true, messenger: true, "google-messages": true, instagram: true, slack: true, gmail: true }, settings: { closeToTray: false, language: "auto" }, window: { width: 1180, height: 800 }, selected: null, pendingDeletion: [] };
 }
 export const uuidPattern = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/;
 export function uuid(value: unknown): string {
@@ -90,7 +90,7 @@ export function validateConfig(value: unknown): Config {
   if (new Set(accounts.map(a => a.id)).size !== accounts.length) throw new Error("Powtórzony identyfikator konta.");
   accounts.forEach((a, i) => { a.order = i; });
   const s = record(v.services), settings = record(v.settings), w = record(v.window);
-  const services = Object.fromEntries(serviceIds.map(id => [id, bool(s[id])])) as Config["services"];
+  const services = Object.fromEntries(serviceIds.map(id => [id, bool(s[id] === undefined && (id === "slack" || id === "gmail") ? true : s[id])])) as Config["services"];
   const pendingDeletion = v.pendingDeletion.map(uuid);
   if (new Set(pendingDeletion).size !== pendingDeletion.length) throw new Error("Powtórzone zadanie usuwania.");
   const selected = v.selected === null ? null : uuid(v.selected);

@@ -6,6 +6,6 @@ Keep dependencies small and remote pages unprivileged. New services, cloud sync,
 
 Use the controlled Electron session test for cookies/storage and restart checks. UI-only fixtures do not establish service compatibility. Log into real services yourself; never send passwords, QR images or two-factor codes to maintainers. Record the platform, package, version and exact scenario in test reports without conversation contents.
 
-Original source is MIT. Do not copy GPL Rambox code into this codebase under an MIT label. Review licenses before adding assets or dependencies. Rebuild bundled third-party notices before each public release.
+Original source is MIT. Do not relabel third-party code as MIT. Review licenses before adding assets or dependencies. Rebuild bundled third-party notices before each public release.
 
 Store submission rules matter: the local Flatpak manifest was AI-generated and must not be submitted to Flathub. The owner must independently author a compliant manifest and disclosure, and perform submission interactions personally under current Flathub policy.

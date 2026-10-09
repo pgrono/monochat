@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Added Slack and Gmail accounts with independent persistent sessions, service toggles and icons.
+- Existing configurations enable the new services without changing account IDs, login sessions or previous service settings.
+
 ## 0.1.0 — Unreleased (2026-10-09)
 
 - Set the final project homepage, Piotr Grono author/maintainer contact and MIT copyright; prepared the source repository for GitHub.

@@ -13,7 +13,7 @@
   <update_contact>piotr@strony.olsztyn.pl</update_contact>
   <summary>Keep independent messaging accounts in one window</summary>
   <summary xml:lang="pl">Niezależne konta komunikatorów w jednym oknie</summary>
-  <description><p>MonoChat is an independent Linux application that embeds the official web interfaces of WhatsApp, Messenger, Google Messages and Instagram Direct. Each account has a separate persistent browser session.</p><p>Use named accounts, pause a service, mute audio and manage local sessions. No MonoChat account or cloud server is required.</p></description>
+  <description><p>MonoChat is an independent Linux application that embeds the official web interfaces of WhatsApp, Messenger, Google Messages, Instagram Direct, Slack and Gmail. Each account has a separate persistent browser session.</p><p>Use named accounts, pause a service, mute audio and manage local sessions. No MonoChat account or cloud server is required.</p></description>
   <launchable type="desktop-id">io.github.pgrono.monochat.desktop</launchable>
   <provides><binary>monochat</binary></provides>
   <categories><category>Network</category><category>InstantMessaging</category></categories>

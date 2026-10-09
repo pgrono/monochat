@@ -78,7 +78,7 @@
         "packaging/io.github.pgrono.monochat.metainfo.xml=/usr/share/metainfo/io.github.pgrono.monochat.metainfo.xml",
         "packaging/copyright=/usr/share/doc/monochat/copyright"
       ],
-      "description": "Niezależne konta WhatsApp, Messenger, Wiadomości Google i Instagram Direct w jednym oknie. Kod MonoChat jest udostępniany na licencji MIT."
+      "description": "Niezależne konta WhatsApp, Messenger, Wiadomości Google, Instagram Direct, Slack i Gmail w jednym oknie. Kod MonoChat jest udostępniany na licencji MIT."
     },
     "publish": null
   },

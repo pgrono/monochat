@@ -98,3 +98,12 @@ Build and lint passed. Packaged linux-unpacked executable passed the Xvfb UI tes
 The final packaged UI test also confirmed that switching PL → DE → PL preserves webContents IDs and page performance.timeOrigin across four live anonymous services. No reload occurred. Updated screenshots and AppImage/deb checksums. No new system-wide deb installation or authenticated messaging tests.
 
 Run the language test using the shared Playwright/axe module paths and Xvfb, as for `tests/electron-ui.cjs`, substituting `tests/electron-i18n.cjs`. `MONOCHAT_EXECUTABLE` optionally selects the packaged binary.
+
+
+## Slack and Gmail — 2026-10-09
+
+New adapters use https://slack.com/signin and https://mail.google.com/mail/u/0/. Confirmed the official Slack email/workspace entry screen and Gmail Google Account sign-in form in Electron 44.7.0 with the normal User-Agent and sandbox enabled. Two anonymous accounts of each service were opened in independent persistent sessions. UI selection, separate cookies, switching without view replacement, global Slack pause/resume, six service choices and compact layout passed; axe reported no violations in Settings. `tests/electron-services.cjs` is the optional live smoke test (shared Playwright/axe modules).
+
+Actual Slack workspace conversations, sending/receiving Gmail messages, attachments and authenticated restarts still require owner sign-in. Showing the sign-in form alone does not confirm successful authentication. Google may reject embedded-browser sign-in: https://support.google.com/accounts/answer/7675428 . Slack email/workspace sign-in is documented at https://slack.com/help/articles/212681477-Sign-in-to-Slack . Provider-managed SSO at arbitrary corporate domains is not allowlisted; these links open externally and that flow is not confirmed in the embedded session. Standard Google, Apple and Microsoft login hosts are allowed for Slack without granting application privileges.
+
+Configuration migration only defaults missing Slack/Gmail flags to enabled, preserves all account IDs and old service flags, rejects malformed flags. Unit coverage includes Slack subdomain boundaries, lookalike hosts, credentials, ports, schemes, blob attachments and unchanged User-Agent.

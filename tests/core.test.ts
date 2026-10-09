@@ -7,7 +7,7 @@ import { randomUUID } from "node:crypto";
 import { ConfigStore, removePartition } from "../src/main/config.js";
 import { Accounts, type AccountRuntime } from "../src/main/lifecycle.js";
 import { defaultConfig, effective, partition, validateConfig, validateCommand, type AccountConfig } from "../src/shared/model.js";
-import { internalURL, webURL, instagramInbox, attachmentURL } from "../src/services/adapters.js";
+import { internalURL, webURL, instagramInbox, attachmentURL, serviceUserAgent } from "../src/services/adapters.js";
 const account = (name = "Prywatne"): AccountConfig => ({ id: randomUUID(), service: "whatsapp", name, enabled: true, order: 0, muted: false, notifications: true });
 function temporary(fn: (dir: string) => void): void {
   const dir = mkdtempSync(join(tmpdir(), "monochat-unit-"));
@@ -117,3 +117,28 @@ test("a dangling partition symlink is an error rather than completed deletion", 
   symlinkSync(join(dir, "missing"), join(dir, "Partitions", `account-${id}`));
   assert.throws(() => removePartition(dir, id), /Niebezpieczna/);
 }));
+
+
+test("older configurations gain new services without changing accounts or flags", () => {
+  const c = defaultConfig(); c.accounts = [account()]; c.selected = c.accounts[0]!.id; c.services.whatsapp = false;
+  const old = JSON.parse(JSON.stringify(c)); delete old.services.slack; delete old.services.gmail;
+  const migrated = validateConfig(old);
+  assert.deepEqual(migrated.accounts, validateConfig(c).accounts); assert.equal(migrated.selected, c.selected);
+  assert.deepEqual(migrated.services, c.services);
+  for (const id of ["slack", "gmail"] as const) {
+    const disabled = validateConfig({ ...old, services: { ...old.services, [id]: false } });
+    assert.equal(disabled.services[id], false);
+    assert.throws(() => validateConfig({ ...old, services: { ...old.services, [id]: "true" } }));
+    assert.equal(validateCommand({ type: "add", service: id, name: "Work" }).type, "add");
+  }
+  delete old.services.whatsapp; assert.throws(() => validateConfig(old));
+});
+test("Slack workspace and Gmail navigation keep authentication internal and reject lookalikes", () => {
+  for (const url of ["https://slack.com/signin", "https://app.slack.com/client/T123", "https://my-team.slack.com/", "https://accounts.google.com/", "https://appleid.apple.com/", "https://login.microsoftonline.com/", "https://login.live.com/"]) assert.equal(internalURL("slack", url), true, url);
+  for (const url of ["https://evilslack.com/", "https://team.slack.com.evil.test/", "https://team.slack.com@evil.test/", "https://a.b.slack.com/", "http://team.slack.com/", "https://team.slack.com:8443/", "slack://open", "https://slack.com/link?url=https://evil.test"]) assert.equal(internalURL("slack", url), false, url);
+  for (const url of ["https://mail.google.com/mail/u/0/", "https://accounts.google.com/signin", "https://myaccount.google.com/"]) assert.equal(internalURL("gmail", url), true);
+  for (const url of ["https://mail.google.com.evil.test/", "https://mail.google.com@evil.test/", "http://mail.google.com/", "https://drive.google.com/", "javascript:alert(1)"]) assert.equal(internalURL("gmail", url), false);
+  assert.equal(internalURL("gmail", "https://app.slack.com/"), false);
+  assert.equal(attachmentURL("gmail", "blob:https://mail.google.com/123"), true);
+  for (const service of ["slack", "gmail"] as const) assert.equal(serviceUserAgent(service, "Chrome/1 Electron/2 MonoChat/3"), "Chrome/1 Electron/2 MonoChat/3");
+});

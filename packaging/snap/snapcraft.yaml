@@ -10,7 +10,7 @@ version: "0.1.0"
 summary: Independent messaging accounts in one Linux window
 description: |
   MonoChat embeds official web interfaces for WhatsApp, Messenger, Google
-  Messages and Instagram Direct with isolated persistent sessions per account.
+  Messages, Instagram Direct, Slack and Gmail with isolated persistent sessions per account.
   It is an independent project, unaffiliated with Meta and Google.
 base: core24
 grade: devel

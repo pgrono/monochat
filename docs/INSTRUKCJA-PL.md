@@ -46,3 +46,10 @@ Licencja kodu: **MIT**. Instalator Zorina może pokazywać „Nieznana licencja�
 ## Język aplikacji
 
 W **Ustawienia → Język aplikacji** wybierz **Automatycznie** albo English, Polski, Deutsch, Français, Español lub Italiano. Domyślnie MonoChat wybiera pierwszy obsługiwany język z ustawień systemowych; jeśli żadnego nie obsługuje, używa angielskiego. Ręczna zmiana działa od razu i jest zapamiętywana po restarcie. Powrót do Automatycznie przywraca wybór systemowy. Nazwy Twoich kont oraz ich sesje pozostają bez zmian. Język stron komunikatorów zmieniasz w samych usługach.
+
+
+## Slack i Gmail
+
+W formularzu „Dodaj konto” wybierz Slack lub Gmail i nadaj własną nazwę. Slack otwiera logowanie przez e-mail lub adres przestrzeni roboczej; Gmail otwiera logowanie Google. Każda dodana instancja ma odrębną sesję. Konta można wyłączać, wyciszać i usuwać tak samo jak pozostałe usługi.
+
+Google może ograniczyć logowanie w osadzonej przeglądarce. Firmowe SSO Slacka kierujące do własnej domeny organizacji nie jest obecnie potwierdzone. Zakres wykonanej weryfikacji opisuje TESTING.md.
