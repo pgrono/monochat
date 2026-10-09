@@ -1,0 +1,4 @@
+#!/bin/sh
+set -eu
+export CHROME_DESKTOP=io.github.pgrono.monochat.desktop
+exec zypak-wrapper /app/monochat/monochat "$@"

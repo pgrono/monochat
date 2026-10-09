@@ -1,0 +1,94 @@
+{
+  "name": "monochat",
+  "productName": "MonoChat",
+  "version": "0.1.0",
+  "description": "Independent multi-account messaging workspace for Linux",
+  "license": "MIT",
+  "private": true,
+  "author": {
+    "name": "Piotr Grono",
+    "email": "piotr@strony.olsztyn.pl",
+    "url": "https://strony.olsztyn.pl/monochat"
+  },
+  "main": "build/main/index.js",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "npm run build && electron .",
+    "typecheck": "tsc --noEmit && tsc -p tsconfig.renderer.json --noEmit",
+    "lint": "node scripts/lint.cjs",
+    "test": "npm run build && node --test build/tests/*.test.js",
+    "test:electron": "npm run build && node scripts/electron-tests.cjs",
+    "build": "tsc && tsc -p tsconfig.renderer.json && node scripts/build.cjs",
+    "dist": "npm run build && electron-builder --linux AppImage deb --x64 --publish never",
+    "dist:dir": "npm run build && electron-builder --linux dir --x64 --publish never",
+    "postinstall": "install-electron",
+    "icons": "node scripts/icons.cjs"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "electron": "44.7.0",
+    "electron-builder": "26.17.0",
+    "typescript": "6.0.3"
+  },
+  "build": {
+    "appId": "io.github.pgrono.monochat",
+    "productName": "MonoChat",
+    "asar": true,
+    "directories": {
+      "output": "release",
+      "buildResources": "assets"
+    },
+    "files": [
+      "build/main/**",
+      "build/shared/**",
+      "build/services/**",
+      "build/preload/**",
+      "build/renderer/**",
+      "assets/icons/**",
+      "LICENSE",
+      "PRIVACY.md",
+      "packaging/copyright"
+    ],
+    "linux": {
+      "executableName": "monochat",
+      "icon": "assets/icons",
+      "category": "Network",
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "desktop": {
+        "entry": {
+          "StartupWMClass": "io.github.pgrono.monochat",
+          "Categories": "Network;InstantMessaging;",
+          "Comment": "Niezależne konta komunikatorów w jednym oknie"
+        }
+      },
+      "syncDesktopName": true
+    },
+    "deb": {
+      "afterInstall": "packaging/after-install.sh",
+      "afterRemove": "packaging/after-remove.sh",
+      "maintainer": "Piotr Grono <piotr@strony.olsztyn.pl>",
+      "synopsis": "MonoChat - niezależne konta komunikatorów",
+      "packageCategory": "net",
+      "fpm": [
+        "packaging/io.github.pgrono.monochat.metainfo.xml=/usr/share/metainfo/io.github.pgrono.monochat.metainfo.xml",
+        "packaging/copyright=/usr/share/doc/monochat/copyright"
+      ],
+      "description": "Niezależne konta WhatsApp, Messenger, Wiadomości Google i Instagram Direct w jednym oknie. Kod MonoChat jest udostępniany na licencji MIT."
+    },
+    "publish": null
+  },
+  "desktopName": "io.github.pgrono.monochat.desktop",
+  "homepage": "https://strony.olsztyn.pl/monochat",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pgrono/monochat.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pgrono/monochat/issues"
+  }
+}

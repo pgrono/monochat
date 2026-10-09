@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>io.github.pgrono.monochat</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>MIT</project_license>
+  <name>MonoChat</name>
+  <developer id="io.github.pgrono"><name>Piotr Grono</name></developer>
+  <url type="homepage">https://strony.olsztyn.pl/monochat</url>
+  <url type="vcs-browser">https://github.com/pgrono/monochat</url>
+  <url type="bugtracker">https://github.com/pgrono/monochat/issues</url>
+  <url type="help">https://github.com/pgrono/monochat/blob/main/docs/INSTRUKCJA-PL.md</url>
+  <url type="contact">https://strony.olsztyn.pl/monochat</url>
+  <update_contact>piotr@strony.olsztyn.pl</update_contact>
+  <summary>Keep independent messaging accounts in one window</summary>
+  <summary xml:lang="pl">Niezależne konta komunikatorów w jednym oknie</summary>
+  <description><p>MonoChat is an independent Linux application that embeds the official web interfaces of WhatsApp, Messenger, Google Messages and Instagram Direct. Each account has a separate persistent browser session.</p><p>Use named accounts, pause a service, mute audio and manage local sessions. No MonoChat account or cloud server is required.</p></description>
+  <launchable type="desktop-id">io.github.pgrono.monochat.desktop</launchable>
+  <provides><binary>monochat</binary></provides>
+  <categories><category>Network</category><category>InstantMessaging</category></categories>
+  <content_rating type="oars-1.1"><content_attribute id="social-chat">intense</content_attribute><content_attribute id="social-audio">intense</content_attribute></content_rating>
+  <requires><internet>always</internet></requires>
+  <releases><release version="0.1.0" date="2026-10-09" type="development"><description><p>Initial development version. Anonymous login screens and isolated sessions tested. Authenticated messaging acceptance is pending.</p></description></release></releases>
+</component>

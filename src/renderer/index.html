@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<title>MonoChat</title><link rel="stylesheet" href="style.css">
+</head>
+<body hidden>
+<aside class="sidebar">
+  <div class="brand"><img class="brand-icon" src="app-icon.png" alt=""><div>MonoChat</div></div>
+  <div class="section-label"><span data-i18n="Konta">Konta</span> <span id="count">0</span></div>
+  <nav id="accounts" aria-label="Konta komunikatorów" data-i18n-label="Konta komunikatorów"></nav>
+  <p id="sidebar-empty" data-i18n="Dodaj pierwsze konto, aby rozpocząć rozmowy.">Dodaj pierwsze konto, aby rozpocząć rozmowy.</p>
+  <footer><button id="add" class="primary" data-i18n="Dodaj konto">Dodaj konto</button><button id="settings" data-i18n="Ustawienia">Ustawienia</button></footer>
+</aside>
+<main>
+  <header><div><span id="current">MonoChat</span><small id="connection" data-i18n="Komunikatory">Komunikatory</small></div><button id="reload" title="Odśwież konto (Ctrl+R)" data-i18n-title="Odśwież konto (Ctrl+R)" hidden data-i18n="Odśwież">Odśwież</button></header>
+  <section id="welcome" class="empty">
+    <div class="setup">
+      <h1 data-i18n="Dodaj pierwsze konto">Dodaj pierwsze konto</h1>
+      <p data-i18n="Wybierz komunikator i zaloguj się na jego stronie. Możesz dodać kilka kont tej samej usługi.">Wybierz komunikator i zaloguj się na jego stronie. Możesz dodać kilka kont tej samej usługi.</p>
+      <ul class="service-list" aria-label="Obsługiwane komunikatory" data-i18n-label="Obsługiwane komunikatory">
+        <li><img src="services-icons/whatsapp.svg" alt="">WhatsApp</li>
+        <li><img src="services-icons/messenger.svg" alt="">Messenger</li>
+        <li><img src="services-icons/googlemessages.png" alt=""><span data-i18n="Wiadomości Google">Wiadomości Google</span></li>
+        <li><img src="services-icons/instagram.svg" alt="">Instagram Direct</li>
+      </ul>
+      <div class="setup-action"><button id="first-account" class="primary" data-i18n="Dodaj konto">Dodaj konto</button><kbd>Ctrl + N</kbd></div>
+      <p class="fine" data-i18n="Każde konto ma własną sesję logowania na tym komputerze.">Każde konto ma własną sesję logowania na tym komputerze.</p>
+    </div>
+  </section>
+  <section id="status" class="empty" hidden><h1 id="status-title" data-i18n="Ładowanie konta…">Ładowanie konta…</h1><p id="status-message"></p><button id="retry" class="primary" data-i18n="Spróbuj ponownie">Spróbuj ponownie</button></section>
+</main>
+<div id="toast" role="alert" hidden></div>
+<dialog id="dialog" aria-labelledby="dialog-title"><div class="dialog-head"><h2 id="dialog-title"></h2><button id="close-dialog" aria-label="Zamknij" data-i18n-label="Zamknij" data-i18n="Zamknij">Zamknij</button></div><div id="dialog-body"></div></dialog>
+<script type="module" src="renderer/app.js"></script>
+</body></html>

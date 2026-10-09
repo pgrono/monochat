@@ -1,0 +1,15 @@
+# Implementation references — checked 2026-10-09
+
+- [Electron stable releases](https://releases.electronjs.org/releases/stable): 44.7.0 was the newest stable shown during implementation.
+- [WebContentsView](https://www.electronjs.org/docs/latest/api/web-contents-view), [webContents](https://www.electronjs.org/docs/latest/api/web-contents), [Session](https://www.electronjs.org/docs/latest/api/session), [security](https://www.electronjs.org/docs/latest/tutorial/security): view ownership, remote isolation, partitioning, permission hooks and `clearData()`.
+- [electron-builder release](https://github.com/electron-userland/electron-builder/releases/tag/electron-builder@26.17.0): packaging version selected. Full transitive license audit awaits successful dependency install.
+- [Rambox CE source](https://github.com/ramboxapp/community-edition/tree/master), [main process](https://raw.githubusercontent.com/ramboxapp/community-edition/master/electron/main.js), [license](https://raw.githubusercontent.com/ramboxapp/community-edition/master/LICENSE): GPL-3.0 reference. Reviewed partition-based permission handling and popup sessions, tray behavior and download handling. No code or artwork copied. MonoChat keeps explicit permission checks and never auto-opens downloads.
+- [WhatsApp](https://web.whatsapp.com/), [Facebook messages](https://www.facebook.com/messages/), [Google Messages](https://messages.google.com/web/), [Instagram Direct](https://www.instagram.com/direct/inbox/): anonymous Chromium entry checks only. Facebook and Instagram redirected to login; Google opened the welcome route. WhatsApp entry responded, but login/QR was not confirmed.
+- [Meta help entry](https://www.facebook.com/help/messenger-app/804132271957789) required login in this environment. The chosen Facebook messages URL was separately checked live; no historical messenger.com availability assumption is used.
+- [Flatpak Electron](https://docs.flatpak.org/en/latest/electron.html): BaseApp, Zypak, permissions and dependency sources.
+- [Flathub requirements](https://docs.flathub.org/docs/for-app-authors/requirements), [submission](https://docs.flathub.org/docs/for-app-authors/submission): owner identity, local validation, development history, AI disclosure and manifest restrictions. The generated local candidate is not a submission artifact.
+- [Snap browser-support](https://snapcraft.io/docs/reference/interfaces/browser-support-interface/): sandbox-related permissions require separate review when requested; do not adopt sample configurations that turn off the application sandbox.
+
+Electron's MIT license and Chromium's bundled third-party notices apply to binary distributions. TypeScript is Apache-2.0; electron-builder is MIT. Original application code/artwork is MIT. The AppStream metadata is dedicated under CC0-1.0, as declared in the XML. Dependency notice completeness is unverified until the actual package can be built.
+
+- Electron system UI language: https://www.electronjs.org/docs/latest/api/app#appgetpreferredsystemlanguages (checked 2026-10-09). Uses preferred language ordering rather than regional date/number locale.

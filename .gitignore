@@ -1,0 +1,26 @@
+node_modules/
+build/
+release/
+.validation/
+.runtime/
+.test-data/
+userData/
+Partitions/
+Session Storage/
+Local Storage/
+Cookies*
+*.log
+.env*
+*.pem
+*.key
+*.snap
+*.flatpak
+flatpak-build/
+flatpak-repo/
+.playwright-mcp/
+
+# Local owner instructions, handoff and desktop captures
+/dane.txt
+/AGENTS.md
+/STAN-PROJEKTU.md
+/20??-??-??_*.png

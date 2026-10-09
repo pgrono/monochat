@@ -1,0 +1,46 @@
+name: Release (manual)
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing reviewed release tag (vX.Y.Z)
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    environment: release
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - name: Validate release version and approval
+        env:
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          node -e 'if(process.env.RELEASE_TAG !== "v"+require("./package.json").version) process.exit(1)'
+          node scripts/release-check.cjs
+      - run: npm ci
+      - run: npm run typecheck && npm run lint && npm test
+      - name: Configure the Electron sandbox helper
+        run: |
+          sudo chown root:root node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+      - run: xvfb-run -a npm run test:electron
+      - run: npm run dist
+      - name: Checksums and draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ inputs.tag }}
+        run: |
+          cd release
+          sha256sum -- *.AppImage *.deb > SHA256SUMS
+          gh release create "$RELEASE_TAG" --verify-tag --draft --generate-notes -- *.AppImage *.deb SHA256SUMS

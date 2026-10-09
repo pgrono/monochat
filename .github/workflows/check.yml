@@ -1,0 +1,30 @@
+name: Check and build
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  linux:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm run lint
+      - run: npm test
+      - name: Configure the Electron sandbox helper
+        run: |
+          sudo chown root:root node_modules/electron/dist/chrome-sandbox
+          sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
+      - run: xvfb-run -a npm run test:electron
+      - run: npm run dist
+      - uses: actions/upload-artifact@v4
+        with:
+          name: monochat-linux-x64
+          path: |
+            release/*.AppImage
+            release/*.deb
+          if-no-files-found: error

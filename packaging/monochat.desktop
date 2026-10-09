@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=MonoChat
+Comment=Independent multi-account messaging workspace
+Comment[pl]=Niezależne konta komunikatorów w jednym oknie
+Exec=monochat
+Icon=io.github.pgrono.monochat
+Terminal=false
+Categories=Network;InstantMessaging;
+StartupWMClass=io.github.pgrono.monochat
+StartupNotify=true

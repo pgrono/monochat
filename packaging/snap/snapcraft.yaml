@@ -1,0 +1,50 @@
+# LOCAL CANDIDATE. Reserve the name and complete confinement tests before uploading.
+name: monochat
+title: MonoChat
+license: MIT
+website: https://strony.olsztyn.pl/monochat
+contact: piotr@strony.olsztyn.pl
+source-code: https://github.com/pgrono/monochat
+issues: https://github.com/pgrono/monochat/issues
+version: "0.1.0"
+summary: Independent messaging accounts in one Linux window
+description: |
+  MonoChat embeds official web interfaces for WhatsApp, Messenger, Google
+  Messages and Instagram Direct with isolated persistent sessions per account.
+  It is an independent project, unaffiliated with Meta and Google.
+base: core24
+grade: devel
+confinement: strict
+platforms:
+  amd64:
+apps:
+  monochat:
+    command: opt/monochat/monochat
+    extensions: [gnome]
+    desktop: usr/share/applications/io.github.pgrono.monochat.desktop
+    environment:
+      CHROME_DESKTOP: io.github.pgrono.monochat.desktop
+    plugs:
+      - network
+      - browser-support
+      - audio-playback
+      - audio-record
+      - camera
+      - unity7
+plugs:
+  browser-support:
+    interface: browser-support
+    allow-sandbox: true
+parts:
+  monochat:
+    plugin: dump
+    source: release/linux-unpacked
+    organize:
+      "*": opt/monochat/
+  desktop:
+    plugin: nil
+    source: .
+    override-build: |
+      install -Dm644 packaging/monochat.desktop "$CRAFT_PART_INSTALL/usr/share/applications/io.github.pgrono.monochat.desktop"
+      sed -i 's|^Icon=.*|Icon=${SNAP}/usr/share/icons/hicolor/512x512/apps/monochat.png|' "$CRAFT_PART_INSTALL/usr/share/applications/io.github.pgrono.monochat.desktop"
+      install -Dm644 assets/icons/512x512.png "$CRAFT_PART_INSTALL/usr/share/icons/hicolor/512x512/apps/monochat.png"

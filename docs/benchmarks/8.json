@@ -1,0 +1,74 @@
+{
+  "count": 8,
+  "electron": "44.7.0",
+  "chromium": "152.0.7977.130",
+  "platform": "linux",
+  "arch": "x64",
+  "kernel": "7.0.0-34-generic",
+  "cpu": "AMD Ryzen 9 7940HS w/ Radeon 780M Graphics",
+  "logicalCPUs": 16,
+  "totalMemoryBytes": 31303847936,
+  "desktopSession": "wayland",
+  "condition": "Anonymous service start pages; 20s warmup, five samples 2s apart. Sum of process working sets can double-count shared memory. No logged-in messaging workload.",
+  "services": [
+    {
+      "service": "whatsapp",
+      "state": "ready"
+    },
+    {
+      "service": "messenger",
+      "state": "ready"
+    },
+    {
+      "service": "google-messages",
+      "state": "ready"
+    },
+    {
+      "service": "instagram",
+      "state": "ready"
+    },
+    {
+      "service": "whatsapp",
+      "state": "ready"
+    },
+    {
+      "service": "messenger",
+      "state": "ready"
+    },
+    {
+      "service": "google-messages",
+      "state": "ready"
+    },
+    {
+      "service": "instagram",
+      "state": "ready"
+    }
+  ],
+  "samples": [
+    {
+      "processes": 15,
+      "workingSetKiB": 2809800,
+      "cpuPercent": 0
+    },
+    {
+      "processes": 15,
+      "workingSetKiB": 2810348,
+      "cpuPercent": 0.24949256422355284
+    },
+    {
+      "processes": 15,
+      "workingSetKiB": 2810652,
+      "cpuPercent": 0.1870840966932313
+    },
+    {
+      "processes": 15,
+      "workingSetKiB": 2811276,
+      "cpuPercent": 0.1871428237231396
+    },
+    {
+      "processes": 15,
+      "workingSetKiB": 2812064,
+      "cpuPercent": 0.1558536832758167
+    }
+  ]
+}
