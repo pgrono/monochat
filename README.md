@@ -13,11 +13,11 @@ Wersja 0.1.0, dostępna w formatach AppImage i deb.
 - Witryna projektu: [strony.olsztyn.pl/portfolio/monochat](https://strony.olsztyn.pl/portfolio/monochat).
 - Własny kod i grafika MonoChat są udostępniane na licencji [MIT](LICENSE).
 
-![Interfejs MonoChat](docs/electron-empty.png)
+![Interfejs MonoChat](docs/screenshots/pl/empty.png)
 
-![Dodawanie konta w MonoChat](docs/electron-add-account.png)
+![Dodawanie konta w MonoChat](docs/screenshots/pl/add-account.png)
 
-![Ustawienia i wybór języka MonoChat](docs/electron-settings.png)
+![Ustawienia i wybór języka MonoChat](docs/screenshots/pl/settings.png)
 
 ### Co możesz zrobić
 
