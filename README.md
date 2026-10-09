@@ -10,7 +10,6 @@ To niezależna aplikacja korzystająca z oficjalnych stron usług. Nie wymaga za
 
 Wersja 0.1.0, dostępna w formatach AppImage i deb.
 
-- Autor i opiekun: Piotr Grono.
 - Witryna projektu: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
 - Kod źródłowy: [pgrono/monochat](https://github.com/pgrono/monochat).
 - Własny kod i grafika MonoChat są udostępniane na licencji [MIT](LICENSE).
@@ -87,7 +86,6 @@ This is an independent app that uses the services' official websites. It require
 
 Version 0.1.0 is available in AppImage and deb formats.
 
-- Author and maintainer: Piotr Grono.
 - Project website: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
 - Source code: [pgrono/monochat](https://github.com/pgrono/monochat).
 - Original MonoChat code and artwork use the [MIT](LICENSE) license.
