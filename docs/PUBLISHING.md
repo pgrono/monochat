@@ -1,6 +1,6 @@
 # Building packages and publishing
 
-Status: local AppImage and deb binaries exist; source repository is `https://github.com/pgrono/monochat`; the first GitHub binary release is being prepared; no store listing exists. Full installed-package acceptance and authenticated service tests remain pending. The full objective remains incomplete.
+Status: local AppImage and deb binaries exist; source repository is `https://github.com/pgrono/monochat`; GitHub release v0.1.0 is public; Snap Store submission is in progress; no installable store release exists. Full installed-package acceptance and authenticated service tests remain pending. The full objective remains incomplete.
 
 ## Identity and first build
 
@@ -60,9 +60,9 @@ snapcraft
 
 The recipe uses core24, GNOME extension and strict confinement. Its local unbundled directory source assumes a prior clean build; public releases must produce that directory in CI, not copy developer profiles. The `browser-support` plug requests `allow-sandbox: true`; the [interface policy](https://snapcraft.io/docs/reference/interfaces/browser-support-interface/) requires review rather than silently switching the sandbox off. Camera/audio-record are optional service permissions and may need explicit interface connections; per-account prompts still apply. Home/removable-media access is not requested; verify file portals before adding any justified permission.
 
-Use a disposable VM for installation and `snap connections monochat` inspection. Verify the GNOME extension's shipped dependencies and Chromium sandbox under confinement. Never publish with `--no-sandbox` or change to classic confinement just to avoid diagnosis. Current recipe has not been built or installed.
+Use a disposable VM for installation and `snap connections monochat` inspection. Verify the GNOME extension's shipped dependencies and Chromium sandbox under confinement. Never publish with `--no-sandbox` or change to classic confinement just to avoid diagnosis. The current recipe has been built and installed on an Ubuntu 24.04 GitHub runner; startup, account configuration and restart persistence passed. Authenticated services, file portals, notifications and multimedia still need confined-package acceptance.
 
-Publisher steps after acceptance: log into Snapcraft locally, reserve an available application name, configure publisher metadata/screenshots, obtain any required interface review, upload the reviewed artifact to an edge channel, verify it, then promote the same revision to stable. No publisher credentials have been provided and no upload was attempted. Do not send tokens in chat; use local authentication or CI secrets.
+The owner account piotrgrono has registered monochat. A CI-built candidate has been uploaded for Store review without release to a channel. See docs/SNAP-STORE.md for current build and test details. Revision 1 was rejected for the sandbox permission and setuid helper; the recipe now uses the namespace sandbox without setuid. Browser sandbox permission still needs Store approval. Do not send tokens in chat; use local authentication or CI secrets.
 
 ## GitHub release
 
@@ -75,7 +75,7 @@ After completing acceptance, create `docs/release-approval.json` with the versio
 ## Remaining owner inputs and actions (2026-10-09)
 
 - Enable GitHub 2FA before taking over a Flathub repository.
-- Snap Store developer account (Ubuntu One), local `snapcraft login`, and reservation of `monochat` if available. The name's availability is not confirmed. Browser sandbox interface review may be necessary.
+- Snap Store account and name reservation are complete. Browser sandbox interface review is required before a Store release.
 - Flathub submission requires a human-authored manifest and human submission/review interaction under its current generative AI policy. This AI-generated application/icon/documentation must be disclosed. An established maintenance history and real functionality are required; acceptance is not guaranteed by metadata readiness.
 - Complete authenticated service and packaged-platform acceptance with the owner, then explicitly authorize publication. Store descriptions and screenshots can be prepared from the verified application; no passwords or private conversations are needed.
 

@@ -1,6 +1,6 @@
 # MonoChat on Snap Store
 
-The name `monochat` is registered to the owner's `piotrgrono` publisher account. Registration alone does not make the application available to install.
+The name `monochat` is registered to the owner's `piotrgrono` publisher account. Registration alone does not make the application available to install. The Store rejected revision 1 for the setuid helper and the sandbox permission. The revised package removes setuid and passed installed-package tests: https://github.com/pgrono/monochat/actions/runs/37945213766 . Browser sandbox permission still needs Store review.
 
 ## Store description
 
