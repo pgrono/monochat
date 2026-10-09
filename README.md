@@ -10,8 +10,7 @@ To niezależna aplikacja korzystająca z oficjalnych stron usług. Nie wymaga za
 
 Wersja 0.1.0, dostępna w formatach AppImage i deb.
 
-- Witryna projektu: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
-- Kod źródłowy: [pgrono/monochat](https://github.com/pgrono/monochat).
+- Witryna projektu: [strony.olsztyn.pl/portfolio/monochat](https://strony.olsztyn.pl/portfolio/monochat).
 - Własny kod i grafika MonoChat są udostępniane na licencji [MIT](LICENSE).
 
 ![Interfejs MonoChat](docs/electron-empty.png)
@@ -86,8 +85,7 @@ This is an independent app that uses the services' official websites. It require
 
 Version 0.1.0 is available in AppImage and deb formats.
 
-- Project website: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
-- Source code: [pgrono/monochat](https://github.com/pgrono/monochat).
+- Project website: [strony.olsztyn.pl/portfolio/monochat](https://strony.olsztyn.pl/portfolio/monochat).
 - Original MonoChat code and artwork use the [MIT](LICENSE) license.
 
 ![MonoChat interface](docs/electron-empty.png)
