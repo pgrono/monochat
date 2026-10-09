@@ -22,7 +22,8 @@ platforms:
   amd64:
 apps:
   monochat:
-    command: opt/monochat/monochat
+    # Use Chromium namespace sandbox; do not ship a setuid executable.
+    command: opt/monochat/monochat --disable-setuid-sandbox
     extensions: [gnome]
     desktop: usr/share/applications/io.github.pgrono.monochat.desktop
     environment:
@@ -53,7 +54,7 @@ parts:
       - libnspr4
     override-build: |
       craftctl default
-      chmod 4755 "$CRAFT_PART_INSTALL/opt/MonoChat/chrome-sandbox"
+      chmod 0755 "$CRAFT_PART_INSTALL/opt/MonoChat/chrome-sandbox"
   desktop:
     plugin: nil
     source: .
