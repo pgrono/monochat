@@ -1,6 +1,6 @@
 # Building packages and publishing
 
-Status: local AppImage and deb binaries exist; source repository is `https://github.com/pgrono/monochat`; no public binary release or store listing exists. Full installed-package acceptance and authenticated service tests remain pending. The full objective remains incomplete.
+Status: local AppImage and deb binaries exist; source repository is `https://github.com/pgrono/monochat`; the first GitHub binary release is being prepared; no store listing exists. Full installed-package acceptance and authenticated service tests remain pending. The full objective remains incomplete.
 
 ## Identity and first build
 
@@ -68,7 +68,7 @@ Publisher steps after acceptance: log into Snapcraft locally, reserve an availab
 
 The owner confirmed `pgrono/monochat` as the source destination. Commits use the owner’s existing Git identity. Local instructions, profiles, credentials and generated packages are excluded from source control.
 
-`check.yml` is prepared for typecheck, lint, tests, controlled Electron tests and AppImage/deb artifacts. The lockfile is now present; the workflow has not yet run on GitHub. `release.yml` runs only by explicit workflow dispatch for an existing reviewed `vX.Y.Z` tag. It checks metadata, builds from a clean checkout, emits SHA256SUMS and creates a **draft** GitHub release. Configure the `release` environment protection and maintain the least-privileged built-in GitHub token. Do not embed tokens.
+`check.yml` is prepared for typecheck, lint, tests, controlled Electron tests and AppImage/deb artifacts. The lockfile is now present; the workflow passed on GitHub for commit 71e1437. `release.yml` runs when a reviewed `vX.Y.Z` tag is pushed, or by explicit workflow dispatch for an existing tag. It checks metadata, builds from a clean checkout, emits SHA256SUMS and publishes a GitHub release with the reviewed release notes. Configure the `release` environment protection and maintain the least-privileged built-in GitHub token. Do not embed tokens.
 
 After completing acceptance, create `docs/release-approval.json` with the version, reviewed commit, reviewer and a link/path to evidence. The preflight is a guard against accidental publication of this incomplete snapshot, not a substitute for running tests. Public publication occurs only when a real release/listing URL exists.
 

@@ -1,5 +1,7 @@
-name: Release (manual)
+name: Release
 on:
+  push:
+    tags: ["v*.*.*"]
   workflow_dispatch:
     inputs:
       tag:
@@ -17,14 +19,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: ${{ inputs.tag }}
+          ref: ${{ inputs.tag || github.ref_name }}
       - uses: actions/setup-node@v4
         with:
           node-version: "24"
           cache: npm
       - name: Validate release version and approval
         env:
-          RELEASE_TAG: ${{ inputs.tag }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           node -e 'if(process.env.RELEASE_TAG !== "v"+require("./package.json").version) process.exit(1)'
           node scripts/release-check.cjs
@@ -36,11 +38,11 @@ jobs:
           sudo chmod 4755 node_modules/electron/dist/chrome-sandbox
       - run: xvfb-run -a npm run test:electron
       - run: npm run dist
-      - name: Checksums and draft release
+      - name: Checksums and publish release
         env:
           GH_TOKEN: ${{ github.token }}
-          RELEASE_TAG: ${{ inputs.tag }}
+          RELEASE_TAG: ${{ inputs.tag || github.ref_name }}
         run: |
           cd release
           sha256sum -- *.AppImage *.deb > SHA256SUMS
-          gh release create "$RELEASE_TAG" --verify-tag --draft --generate-notes -- *.AppImage *.deb SHA256SUMS
+          gh release create "$RELEASE_TAG" --verify-tag --title "MonoChat $RELEASE_TAG — Initial release" --notes-file ../docs/releases/0.1.0.md -- *.AppImage *.deb SHA256SUMS

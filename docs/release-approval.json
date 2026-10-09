@@ -1,0 +1,6 @@
+{
+  "version": "0.1.0",
+  "commit": "71e14378f8634b0f4d164a65fcfc06703139a8ae",
+  "approvedBy": "Piotr Grono",
+  "evidence": "Owner requested the first GitHub Release on 2026-10-09 and previously reported the application working. CI passed: https://github.com/pgrono/monochat/actions/runs/37925150677 . Detailed test scope and remaining checks: docs/TESTING.md. This approval does not claim completion of every platform or authenticated-service test."
+}
