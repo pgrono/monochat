@@ -6,6 +6,7 @@ on:
     paths:
       - packaging/snap/**
       - scripts/prepare-snap.cjs
+      - tests/snap-smoke.cjs
       - .github/workflows/snap.yml
 permissions:
   contents: read
@@ -27,3 +28,17 @@ jobs:
           name: monochat-snap-candidate
           path: ${{ steps.build.outputs.snap }}
           if-no-files-found: error
+      - name: Install and connect the test Snap
+        env:
+          SNAP_FILE: ${{ steps.build.outputs.snap }}
+        run: |
+          sudo snap install --dangerous "$SNAP_FILE"
+          sudo snap connect monochat:browser-support
+          snap connections monochat
+      - name: Test the installed Snap
+        run: xvfb-run -a node tests/snap-smoke.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: monochat-snap-smoke
+          path: .test-data/snap-smoke.*
