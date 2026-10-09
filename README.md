@@ -4,117 +4,154 @@
 
 ## Polski
 
-MonoChat to niezależna aplikacja desktopowa dla Linux, która łączy wiele kont WhatsApp, Messenger, Wiadomości Google, Instagram Direct, Slack i Gmail w jednym oknie. Korzysta z oficjalnych stron usług. Jest napisana w TypeScript i Electron, bez frameworka frontendowego i własnego serwera.
+MonoChat pozwala korzystać z WhatsApp, Messengera, Wiadomości Google, Instagram Direct, Slacka i Gmaila w jednym oknie na Linuxie. Możesz dodać kilka kont tej samej usługi i przełączać się między nimi z paska po lewej stronie. Każde konto ma osobną sesję logowania.
 
-**Wersja 0.1.0.** Dostępne formaty pakietów: AppImage i deb.
+To niezależna aplikacja korzystająca z oficjalnych stron usług. Nie wymaga zakładania konta MonoChat i nie zbiera telemetrii.
 
-- Autor i opiekun: **Piotr Grono**.
+Wersja 0.1.0, dostępna w formatach AppImage i deb.
+
+- Autor i opiekun: Piotr Grono.
 - Witryna projektu: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
 - Kod źródłowy: [pgrono/monochat](https://github.com/pgrono/monochat).
-- Licencja własnego kodu i grafiki MonoChat: [MIT](LICENSE).
+- Własny kod i grafika MonoChat są udostępniane na licencji [MIT](LICENSE).
 
-![MonoChat — interfejs aplikacji](docs/electron-empty.png)
+![Interfejs MonoChat](docs/electron-empty.png)
 
 ![Dodawanie konta w MonoChat](docs/electron-add-account.png)
 
 ![Ustawienia i wybór języka MonoChat](docs/electron-settings.png)
 
-### Funkcje
+### Co możesz zrobić
 
-- Wiele niezależnych kont tej samej usługi, każde z własnym UUID i trwałą partycją przeglądarki.
-- Dodawanie, nazywanie, zmiana kolejności, wyłączanie i usuwanie kont; osobne ustawienia dźwięku i powiadomień.
-- Włączanie i wyłączanie całej usługi z zachowaniem ustawień jej kont.
-- Przełączanie aktywnych kont bez przeładowania stron. Włączone konta działają w tle.
-- Interfejs angielski, polski, niemiecki, francuski, hiszpański i włoski.
-- Automatyczny język systemu lub ręczny wybór w ustawieniach, działający od razu i zapamiętywany po restarcie.
-- Osadzone strony odseparowane od lokalnego interfejsu, bez dostępu do Node.js ani API aplikacji.
-- Atomowy zapis konfiguracji, kopia ostatniej poprawnej konfiguracji i trwały rejestr usuwania danych.
-- Zapamiętanie okna, ochrona przed drugą kopią, opcjonalne zamykanie do zasobnika i jawne zakończenie programu.
-- Pakiety AppImage i deb dla Linux.
+- Dodać konta, nadać im własne nazwy i ustawić ich kolejność.
+- Przełączać się między włączonymi kontami bez przeładowywania stron. Pozostałe konta nadal działają w tle.
+- Wyłączyć jedno konto albo wszystkie konta danej usługi, zachowując ich ustawienia.
+- Osobno wyciszyć dźwięk i wyłączyć powiadomienia dla każdego konta.
+- Wybrać język interfejsu: angielski, polski, niemiecki, francuski, hiszpański lub włoski.
+- Wysyłać załączniki przez systemowe okno wyboru pliku i wskazać miejsce zapisu pobieranych plików. MonoChat nie uruchamia ich automatycznie.
+
+Aplikacja zapamiętuje rozmiar i położenie okna oraz zapobiega uruchomieniu drugiej kopii. Możesz włączyć zamykanie do zasobnika, jeśli pulpit go obsługuje, albo całkowicie zakończyć program.
 
 ### Instalacja i uruchomienie
 
-Podstawowa platforma: **Linux x86_64**. Lokalne paczki znajdują się w `release/`:
+MonoChat jest przygotowany dla Linux x86_64. Lokalne paczki znajdują się w `release/`:
 
-- `MonoChat-0.1.0.AppImage` — uruchom jako zwykły użytkownik; system może wymagać zgodności z FUSE 2.
-- `monochat_0.1.0_amd64.deb` — pakiet dla Ubuntu/Debian.
+- `MonoChat-0.1.0.AppImage`: pakiet AppImage. System może wymagać obsługi FUSE 2.
+- `monochat_0.1.0_amd64.deb`: pakiet dla Ubuntu i Debiana.
 
-Uruchamiaj MonoChat jako zwykły użytkownik, z włączonym sandboxem Chromium. Więcej informacji znajdziesz w [instrukcji po polsku](docs/INSTRUKCJA-PL.md).
+Uruchamiaj program na zwykłym koncie użytkownika, z włączonym sandboxem Chromium. Szczegóły znajdziesz w [instrukcji po polsku](docs/INSTRUKCJA-PL.md).
 
-### Korzystanie
+### Dodawanie i obsługa kont
 
-Wybierz **Dodaj konto**, usługę oraz nazwę konta. Zaloguj się bezpośrednio na oficjalnej stronie. Możesz powtórzyć to dla kolejnych kont tej samej usługi. Nie wpisuj haseł do usług w formularzach ustawień MonoChat.
+Kliknij **Dodaj konto**, wybierz usługę i wpisz nazwę konta. Zaloguj się na stronie usługi otwartej w aplikacji. Hasło podajesz wyłącznie na oficjalnej stronie, nigdy w ustawieniach MonoChat. Kolejne konto dodajesz w ten sam sposób.
 
-W **Ustawieniach** znajdziesz również wyłączone konta, przełączniki usług, dźwięku i powiadomień, kolejność oraz usuwanie. Zmiany pojedynczego konta zatwierdzaj przyciskiem **Zapisz**. Usunięcie dotyczy tylko lokalnej instancji i jej sesji, nie konta w usłudze. Restart kończy usunięcie katalogu partycji. Błąd czyszczenia pozostaje widoczny i umożliwia ponowienie.
+W **Ustawieniach** znajdziesz wszystkie konta, również wyłączone. Możesz zmienić nazwę, aktywność, dźwięk i powiadomienia. Zmiany w danym koncie zatwierdzasz przyciskiem **Zapisz**. Kolejność ustawisz przeciąganiem lub przyciskami **Wyżej / Niżej**.
 
-**Ustawienia → Język aplikacji** pozwala wybrać Automatycznie, English, Polski, Deutsch, Français, Español lub Italiano. Tryb automatyczny wybiera pierwszy obsługiwany język systemu, a przy braku takiego języka — angielski. Zmiana nie przeładowuje komunikatorów. Język stron usług ustawiasz w samych usługach.
+Przed usunięciem konta aplikacja prosi o potwierdzenie i pokazuje jego nazwę. Usuwa lokalną sesję; samo konto u dostawcy usługi pozostaje. Restart kończy usuwanie katalogu sesji. Jeśli czyszczenie się nie powiedzie, zobaczysz błąd i możliwość ponowienia.
 
-Skróty: **Ctrl+N** — dodawanie, **Ctrl+,** — ustawienia, **Ctrl+R** — przeładowanie bieżącej usługi, **Ctrl+Q** — zakończenie. **Esc** zamyka lokalny dialog. Kolejność można zmieniać przeciąganiem oraz przyciskami **Wyżej / Niżej**.
+### Język i skróty
 
-### Ograniczenia i prywatność
+W **Ustawieniach**, w polu **Język aplikacji**, możesz zostawić domyślne „Automatycznie” albo wybrać English, Polski, Deutsch, Français, Español lub Italiano. Tryb automatyczny wybiera pierwszy obsługiwany język systemu, a jeśli go nie znajdzie, używa angielskiego. Starsze ustawienia przechodzą na ten tryb bez zmian kont i sesji.
 
-Logowanie, rozmowy i załączniki obsługują oficjalne strony. Google Messages wymaga telefonu/konta zgodnie z zasadami usługi; MonoChat nie wysyła SMS samodzielnie. Instagram otwiera Direct, ale pozostała nawigacja strony nie jest usuwana. Nie ma licznika nieprzeczytanych wiadomości, ponieważ nie potwierdzono wiarygodnej integracji.
+Zmiana języka działa od razu i zostaje zapamiętana po restarcie. Nie przeładowuje otwartych usług. Język ich stron ustawiasz osobno, w samych usługach.
 
-Powiadomienia i dźwięk mają osobne przełączniki. Powiadomienia korzystają z mechanizmów danej usługi i pulpitu Linux. Wyłączenie konta zatrzymuje jego stronę i usuwa rejestrację service workerów, zachowując dane logowania.
+- Ctrl+N otwiera dodawanie konta.
+- Ctrl+, otwiera ustawienia.
+- Ctrl+R odświeża wybraną usługę, wracając do jej adresu startowego.
+- Ctrl+Q kończy program.
+- Esc zamyka okno dialogowe MonoChat.
 
-MonoChat nie dodaje telemetrii i nie wymaga własnego konta użytkownika. [Prywatność](PRIVACY.md), [bezpieczeństwo i zgłaszanie podatności](SECURITY.md), [zasady współpracy](CONTRIBUTING.md).
+### Sesje i bezpieczeństwo
 
----
+Każde konto ma stały identyfikator UUID i osobną, zapisywaną na dysku partycję przeglądarki. Konfiguracja jest zapisywana atomowo, z kopią ostatniej poprawnej wersji. Rejestr usuwania danych pozwala dokończyć tę operację po restarcie.
+
+Strony usług działają w sandboxie, oddzielnie od interfejsu MonoChat. Nie mają dostępu do Node.js, API aplikacji ani skryptu preload. Okna logowania korzystają z sesji właściwego konta. Uprawnienia dotyczą konkretnego konta i adresu strony, a aplikacja sprawdza nawigację i polecenia przesyłane przez lokalny interfejs.
+
+Podczas otwierania ustawień lub innego okna dialogowego MonoChat ukrywa widok usługi. Pokazuje też stan ładowania oraz komunikaty o braku sieci lub awarii strony, z możliwością ponowienia.
+
+Program jest napisany w TypeScript i Electron, korzysta z WebContentsView, nie używa frameworka frontendowego ani własnego serwera.
+
+### Działanie usług i prywatność
+
+Logowanie, wiadomości i załączniki obsługują oficjalne strony dostawców. Wiadomości Google wymagają telefonu i konta zgodnie z zasadami Google; MonoChat nie wysyła SMS-ów samodzielnie. Instagram otwiera skrzynkę Direct i wraca do niej po przekierowaniu na stronę główną podczas logowania. Pozostała nawigacja Instagrama jest dostępna. Licznika nieprzeczytanych wiadomości nie ma, ponieważ nie potwierdzono sposobu jego wiarygodnego odczytu.
+
+Powiadomienia korzystają z mechanizmów usług i pulpitu Linux. Wyłączenie konta zatrzymuje jego stronę oraz wyrejestrowuje service workery, czyli zadania strony działające w tle. Zachowuje przy tym cookies i zapisane dane, w tym sesję logowania.
+
+Więcej informacji: [prywatność](PRIVACY.md), [bezpieczeństwo i zgłaszanie podatności](SECURITY.md), [zasady współpracy](CONTRIBUTING.md).
 
 ## English
 
-An independent Linux desktop workspace for multiple WhatsApp, Messenger, Google Messages, Instagram Direct, Slack and Gmail accounts. Written in TypeScript with Electron WebContentsView, without a frontend framework or application server.
+MonoChat brings WhatsApp, Messenger, Google Messages, Instagram Direct, Slack and Gmail into one window on Linux. You can add several accounts from the same service and switch between them using the sidebar. Each account has its own sign-in session.
 
-**Version 0.1.0.** Package formats: AppImage and deb.
+This is an independent app that uses the services' official websites. It requires no separate MonoChat account and collects no telemetry.
 
-- Author and maintainer: **Piotr Grono**.
+Version 0.1.0 is available in AppImage and deb formats.
+
+- Author and maintainer: Piotr Grono.
 - Project website: [strony.olsztyn.pl/monochat](https://strony.olsztyn.pl/monochat).
 - Source code: [pgrono/monochat](https://github.com/pgrono/monochat).
-- License for original MonoChat code and artwork: [MIT](LICENSE).
+- Original MonoChat code and artwork use the [MIT](LICENSE) license.
 
-![MonoChat running in Electron](docs/electron-empty.png)
+![MonoChat interface](docs/electron-empty.png)
 
-![Add an account in MonoChat](docs/electron-add-account.png)
+![Adding an account in MonoChat](docs/electron-add-account.png)
 
 ![MonoChat settings and language selection](docs/electron-settings.png)
 
-### Features
+### What you can do
 
-- Separate immutable UUID and persistent Electron partition for every account.
-- English, Polish, German, French, Spanish and Italian UI, selected automatically from the system language or manually in Settings.
-- Account sidebar, add/rename, enable/disable, independent audio and notification controls, drag ordering and keyboard ordering buttons.
-- Global service pause that retains individual account flags.
-- Kept-alive enabled views; switching does not recreate or load them again.
-- Local dialogs hide remote views. Startup, loading, network errors, retry and renderer crashes have UI states.
-- Atomic configuration, backup recovery and a durable deletion journal. Account removal confirms its name and finishes directory removal on restart.
-- Sandboxed remote pages without preload or application IPC. Validated local IPC, navigation rules, same-session login popups and origin-scoped permission prompts.
-- Native file upload dialogs and downloads with save dialogs; downloads never auto-execute.
-- Window geometry, single-instance lock, optional close-to-tray with a live Linux tray-host check, explicit quit.
-- AppImage and deb packages for Linux.
+- Add accounts, give them your own names and arrange them in the sidebar.
+- Switch between enabled accounts without reloading their pages. Other enabled accounts keep running in the background.
+- Disable one account or pause every account from a service while keeping their settings.
+- Control audio and notifications separately for each account.
+- Choose an English, Polish, German, French, Spanish or Italian interface.
+- Upload attachments through the system file picker and choose where downloads are saved. MonoChat never runs downloaded files automatically.
+
+The app remembers its window size and position and prevents a second copy from starting. You can enable closing to the system tray when your desktop supports it, or quit the app completely.
 
 ### Installation
 
-Platform: **Linux x86_64**. Local packages are available in `release/`:
+MonoChat targets Linux x86_64. Local packages are in `release/`:
 
-- `MonoChat-0.1.0.AppImage` — run as a regular user; your system may require FUSE 2 compatibility.
-- `monochat_0.1.0_amd64.deb` — package for Ubuntu/Debian.
+- `MonoChat-0.1.0.AppImage`: the AppImage package. Your system may need FUSE 2 support.
+- `monochat_0.1.0_amd64.deb`: a package for Ubuntu and Debian.
 
-Run MonoChat as a regular user with Chromium sandboxing enabled.
+Run the app as a regular user with Chromium sandboxing enabled.
 
-### Usage
+### Adding and managing accounts
 
-**Settings → Application language** offers Automatic (the default) and six languages, listed by their native names. Changes apply immediately and persist across restarts. Automatic uses the first supported system language, falling back to English. Existing configurations migrate to Automatic without changing accounts or sessions. Service websites keep their own language settings.
+Click **Add account**, choose a service and enter a name. Sign in on the service page that opens in the app. Enter your password only on the official page, never in MonoChat settings. Repeat these steps to add another account.
 
-Choose **Add account**, a service and a name. Authenticate in the official page. Repeat for additional accounts, including multiple accounts of the same service. Do not enter service passwords into any MonoChat settings field.
+**Settings** lists all accounts, including disabled ones. You can rename an account, enable or disable it, and change its audio and notification settings. Click **Save** to apply those changes. Reorder accounts by dragging them or using **Move up / Move down**.
 
-Use **Settings** for disabled accounts, service pause, audio, notifications, order and removal. Save individual account edits with **Save**. Removing an account affects this local installation only; the service account remains. Restart completes the queued partition-directory deletion. A failure stays visible and can be retried.
+Before removing an account, the app shows its name and asks for confirmation. It removes the local session; your account with the service remains. Restarting completes removal of the session directory. If cleanup fails, the app shows an error and lets you retry.
 
-Shortcuts: Ctrl+N adds an account, Ctrl+, opens settings, Ctrl+R returns the selected service to its start URL, Ctrl+Q exits. Esc closes a local dialog. Reordering is also available through **Move up / Move down**.
+### Language and shortcuts
 
-### Integration boundaries
+In **Settings**, under **Application language**, keep the default Automatic option or choose English, Polski, Deutsch, Français, Español or Italiano. Automatic uses the first supported system language and falls back to English. Older configurations switch to Automatic without changing accounts or sessions.
 
-Official pages own authentication, message data and attachment UI. Google Messages depends on the user's phone/account and is not an independent SMS sender. Instagram starts at Direct and redirects the post-login root back to Direct; the remaining official navigation is not removed. There is no unread counter because no reliable integration has been verified.
+Language changes take effect immediately and persist across restarts. They do not reload the services. Each service website has its own language settings.
 
-Notification permission and audio are controlled separately. Notifications use the mechanisms provided by each service and the Linux desktop. Service workers are unregistered on disable to stop background work; cookies and site storage are retained.
+- Ctrl+N opens the account form.
+- Ctrl+, opens settings.
+- Ctrl+R reloads the selected service at its start URL.
+- Ctrl+Q quits the app.
+- Esc closes a MonoChat dialog.
 
-MonoChat adds no telemetry and requires no separate MonoChat account. [Privacy](PRIVACY.md) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md).
+### Sessions and security
+
+Every account has a permanent UUID and a separate browser partition saved on disk. Configuration writes are atomic, with a backup of the last valid version. A deletion journal lets the app finish removing session data after a restart.
+
+Service pages run in a sandbox, separate from the MonoChat interface. They have no access to Node.js, the app API or a preload script. Login windows use the session of the account that opened them. Permissions apply to a specific account and website origin. The app validates navigation and commands sent by its local interface.
+
+MonoChat hides the service view while settings or another local dialog is open. It also shows loading states, network errors and page crashes, with an option to retry.
+
+The app is written in TypeScript and Electron using WebContentsView. It has no frontend framework or application server.
+
+### Service behavior and privacy
+
+The providers' official pages handle sign-in, messages and attachments. Google Messages depends on your phone and account under Google's rules; MonoChat does not send SMS on its own. Instagram opens Direct and returns there if sign-in redirects to the home page. Its other navigation remains available. There is no unread counter because a reliable way to read it has not been verified.
+
+Notifications use the mechanisms provided by each service and the Linux desktop. Disabling an account stops its page and unregisters service workers, the website tasks that run in the background. Cookies and stored site data, including the sign-in session, are kept.
+
+Read more about [privacy](PRIVACY.md), [security and vulnerability reports](SECURITY.md), and [contributing](CONTRIBUTING.md).
