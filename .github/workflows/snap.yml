@@ -1,0 +1,29 @@
+name: Build Snap candidate
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - packaging/snap/**
+      - scripts/prepare-snap.cjs
+      - .github/workflows/snap.yml
+permissions:
+  contents: read
+jobs:
+  snap:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+      - run: node scripts/prepare-snap.cjs
+      - uses: snapcore/action-build@v1
+        id: build
+        with:
+          path: .runtime/snap-build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: monochat-snap-candidate
+          path: ${{ steps.build.outputs.snap }}
+          if-no-files-found: error

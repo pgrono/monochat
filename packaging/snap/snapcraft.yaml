@@ -1,17 +1,20 @@
-# LOCAL CANDIDATE. Reserve the name and complete confinement tests before uploading.
+# Snap Store candidate. Validate confinement before promoting to stable.
 name: monochat
 title: MonoChat
 license: MIT
-website: https://strony.olsztyn.pl/monochat
+website: https://strony.olsztyn.pl/portfolio/monochat
 contact: piotr@strony.olsztyn.pl
 source-code: https://github.com/pgrono/monochat
 issues: https://github.com/pgrono/monochat/issues
 version: "0.1.0"
+icon: assets/icons/512x512.png
 summary: Independent messaging accounts in one Linux window
 description: |
   MonoChat embeds official web interfaces for WhatsApp, Messenger, Google
   Messages, Instagram Direct, Slack and Gmail with isolated persistent sessions per account.
-  It is an independent project, unaffiliated with Meta and Google.
+  Name and organize your accounts, pause them individually or by service,
+  and choose from six interface languages. No MonoChat account is required.
+  MonoChat is an independent project, unaffiliated with the service providers.
 base: core24
 grade: devel
 confinement: strict
@@ -38,9 +41,19 @@ plugs:
 parts:
   monochat:
     plugin: dump
-    source: release/linux-unpacked
+    source: https://github.com/pgrono/monochat/releases/download/v0.1.0/monochat_0.1.0_amd64.deb
+    source-type: deb
+    source-checksum: sha256/4c38d304a226a75450cb4114c8654e3f8463a65e16fbe2416aaecbfe03210088
     organize:
-      "*": opt/monochat/
+      opt/MonoChat: opt/monochat
+    stage:
+      - -usr/share/applications/io.github.pgrono.monochat.desktop
+    stage-packages:
+      - libnss3
+      - libnspr4
+    override-build: |
+      craftctl default
+      chmod 4755 "$CRAFT_PART_INSTALL/opt/MonoChat/chrome-sandbox"
   desktop:
     plugin: nil
     source: .
